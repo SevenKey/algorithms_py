@@ -1,6 +1,6 @@
 import unittest
 import random
-from sort import QuickSort, HeapSort, CountSort
+from sort import QuickSort, HeapSort, CountSort, BucketSort
 
 
 class TestSort(unittest.TestCase):
@@ -50,6 +50,16 @@ class TestSort(unittest.TestCase):
 
         array.sort()
         self.assertListEqual(array, sort_array)
+
+    # 测试桶排序
+    def test_bucket(self):
+        array = [4.5, 0.84, 3.25, 2.18, 0.5]
+
+        bucket = BucketSort.BucketSort()
+        sort_array = bucket.sort(array=array)
+
+        array.sort()
+        self.assertListEqual(array,sort_array)
 
 
 if __name__ == '__main__':
