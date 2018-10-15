@@ -1,6 +1,6 @@
 import unittest
 import random
-from sort import QuickSort, HeapSort, CountSort, BucketSort,BubbleSort
+from sort import QuickSort, HeapSort, CountSort, BucketSort, BubbleSort, CockTailSort
 
 
 class TestSort(unittest.TestCase):
@@ -61,7 +61,7 @@ class TestSort(unittest.TestCase):
         array.sort()
         self.assertListEqual(array, sort_array)
 
-    # 冒泡排序测试
+    # 测试冒泡排序
     def test_bubble(self):
         array = self.get_random_array()
         copy_array = array.copy()
@@ -70,7 +70,19 @@ class TestSort(unittest.TestCase):
         bubble.sort(array=array)
 
         copy_array.sort()
-        self.assertListEqual(array,copy_array)
+        self.assertListEqual(array, copy_array)
+
+    # 测试鸡尾酒排序
+    def test_cock_tail(self):
+        array = self.get_random_array()
+        copy_array = array.copy()
+
+        cock_tail = CockTailSort.CockTailSort()
+        cock_tail.sort(array=array)
+
+        copy_array.sort()
+        self.assertListEqual(array, copy_array)
+
 
 if __name__ == '__main__':
     unittest.main()
