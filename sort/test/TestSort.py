@@ -1,6 +1,6 @@
 import unittest
 import random
-from sort import QuickSort, HeapSort
+from sort import QuickSort, HeapSort, CountSort
 
 
 class TestSort(unittest.TestCase):
@@ -41,6 +41,15 @@ class TestSort(unittest.TestCase):
             heap.down(array, 0)
 
         self.assertListEqual(copy_array, heap_array)
+
+    # 测试计数排序
+    def test_count(self):
+        array = self.get_random_array()
+        count = CountSort.CountSort()
+        sort_array = count.sort(array=array)
+
+        array.sort()
+        self.assertListEqual(array, sort_array)
 
 
 if __name__ == '__main__':
