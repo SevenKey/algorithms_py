@@ -55,7 +55,8 @@ class TestClassical(unittest.TestCase):
 
         return head
 
-    def get_linked_list_values(self, head):
+    @staticmethod
+    def get_linked_list_values(head):
         cur = head
         listValues = list()
         while cur is not None:
@@ -65,12 +66,12 @@ class TestClassical(unittest.TestCase):
 
     def test_reversal(self):
         head = TestClassical.build_linked_list()
+        list1 = TestClassical.get_linked_list_values(head)
         reversed = ReversalLinkedList.ReversalLinkedList()
         tail = reversed.reversal(head)
-        list1 = TestClassical.get_linked_list_values(head)
         list2 = TestClassical.get_linked_list_values(tail)
-        for step in range(len(list1)):
-            self.assertEqual(list1[step], list2[len(list2) - step])
+        list2.reverse()
+        self.assertListEqual(list1,list2)
 
 
 if __name__ == '__main__':
