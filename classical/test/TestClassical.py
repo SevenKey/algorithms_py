@@ -1,5 +1,5 @@
 import unittest
-from classical import Dijkstra, ReversalLinkedList, LinkedNode
+from classical import Dijkstra, ReversalLinkedList, LinkedNode, LinkedListLoop
 
 
 class TestClassical(unittest.TestCase):
@@ -72,6 +72,14 @@ class TestClassical(unittest.TestCase):
         list2 = TestClassical.get_linked_list_values(tail)
         list2.reverse()
         self.assertListEqual(list1,list2)
+
+    def test_loop(self):
+        head = TestClassical.build_linked_list()
+        loop = LinkedListLoop.LinkedListLoop()
+        result1 = loop.hasLoop1(head)
+        result2 = loop.hasLoop2(head)
+        self.assertEqual(False, result1)
+        self.assertEqual(False, result2)
 
 
 if __name__ == '__main__':
