@@ -1,3 +1,6 @@
+import math
+
+
 class Solution:
     # 给定一个非负整数数组 A，返回一个由 A 的所有偶数元素组成的数组，后面跟 A 的所有奇数元素。
     # 你可以返回满足此条件的任何数组作为答案。
@@ -62,7 +65,7 @@ class Solution:
 
     # 给定长度为 2n 的数组, 你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), ..., (an, bn)
     # 使得从1 到 n 的 min(ai, bi) 总和最大。
-    def  arrayPairSum(self, nums):
+    def arrayPairSum(self, nums):
         exits = [0] * 20001
         for i in range(len(nums)):
             exits[nums[i] + 10000] += 1
@@ -94,9 +97,83 @@ class Solution:
                         temp.append(B[i - 1][k - 1] + B[i - 1][k])
                 while k < i:
                     k += 1
-                    temp.append(temp[(i-k)])
+                    temp.append(temp[(i - k)])
                 B.append(temp)
         return B
 
+    # 将一个矩阵重塑为另一个大小不同的新矩阵，但保留其原始数据
+    def matrixReshape(self, nums, r, c):
+        if (len(nums) * len(nums[0]) != r * c):
+            return nums
+        ans = [[None] * c for _ in range(r)]
+
+        m, n = 0, 0
+        for i in range(len(nums)):
+            for j in range(len(nums[i])):
+                ans[m % r][n % c] = nums[i][j]
+                n += 1
+                if (n % c == 0):
+                    m += 1
+        return ans
+
+    def matrixReshape1(self, nums, r, c):
+        n, m = len(nums), len(nums[0])
+        if (m * n != r * c):
+            return nums
+        ans = [[None] * c for _ in range(r)]
+        for i in range(c * r):
+            ans[(int)(i / c)][i % c] = nums[(int)(i / m)][i % m]
+        return ans
+
+    # 对角线相等
+    def isToeplitzMatrix(self, matrix):
+        for i in range(len(matrix) - 1):
+            for j in range(len(matrix[0]) - 1):
+                if matrix[i][j] != matrix[i + 1][j + 1]:
+                    return False
+        return True
+
+    # 给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+    def majorityElement(self, nums):
+        map = dict()
+        size = len(nums)
+        for i in range(size):
+            if (map.get(nums[i]) is None):
+                map[nums[i]] = 1
+            else:
+                map[nums[i]] = map.get(nums[i]) + 1
+
+            if (map[nums[i]] >= math.ceil(size / 2)):
+                return nums[i]
+
+    def majorityElement1(self, nums):
+        count, ret = 0, 0
+        for i in range(len(nums)):
+            if count == 0:
+                ret = nums[i]
+                count += 1
+            elif ret == nums[i]:
+                count += 1
+            else:
+                count -= 1
+        return ret
+
+    # 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
+    def moveZeroes(self, nums):
+        size = len(nums)
+        if (size <= 1):
+            return
+        p = 0
+        for num in nums:
+            if num != 0:
+                nums[p] = num
+                p += 1
+        while p < size:
+            nums[p] = 0
+            p += 1
+
+
 test = Solution()
-test.generate(1)
+nums = [0,1,0,3,12]
+list = test.moveZeroes(nums)
+print(list)
