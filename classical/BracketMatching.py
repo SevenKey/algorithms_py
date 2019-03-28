@@ -10,9 +10,6 @@ class BracketMatching:
     def __init__(self):
         pass
 
-    __num = 0
-    __counts = 0
-
     def ways(self, num):
         result = 1
         for i in range(num + 1, 2 * num + 1):

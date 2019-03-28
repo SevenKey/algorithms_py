@@ -216,9 +216,5 @@ class Solution:
         return sum
 
 
-test = Solution()
-nums = [1, 1, 0, 1, 1, 1]
-t = test.findMaxConsecutiveOnes(nums)
-print(t)
 
 
