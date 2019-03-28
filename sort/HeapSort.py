@@ -54,6 +54,7 @@ class HeapSort:
             if array[parent] > array[children]:
                 self.down(array, parent)
             i -= 1
+            parents.append(parent)
             if i <= 1:
                 break
             parent = int((i - 1) / 2)

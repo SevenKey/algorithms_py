@@ -172,8 +172,53 @@ class Solution:
             nums[p] = 0
             p += 1
 
+    # 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。
+    def removeElement(self, nums, val):
+        size = len(nums)
+        if size <= 1:
+            return 0
+        i, j = 0, size - 1
+        while i < j:
+            while nums[i] != val and i < size - 1:
+                i += 1
+            while nums[j] == val and j > 0:
+                j -= 1
+            if (i < j):
+                temp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = temp
+        return j + 1
+
+    def removeElement1(self, nums, val):
+        size = len(nums)
+        if size <= 0:
+            return 0
+        p = 0
+        for num in nums:
+            if num != val:
+                nums[p] = num
+                p += 1
+        return p
+
+    def findMaxConsecutiveOnes(self, nums):
+        size = len(nums)
+        if size <= 0:
+            return 0
+        sum, temp = 0, 0
+        for num in nums:
+            if num == 0:
+                sum = max(sum, temp)
+                temp = 0
+            else:
+                temp += 1
+        if temp != 0:
+            sum = max(sum, temp)
+        return sum
+
 
 test = Solution()
-nums = [0,1,0,3,12]
-list = test.moveZeroes(nums)
-print(list)
+nums = [1, 1, 0, 1, 1, 1]
+t = test.findMaxConsecutiveOnes(nums)
+print(t)
+
+
