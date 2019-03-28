@@ -1,5 +1,6 @@
 import unittest
-from classical import Dijkstra, ReversalLinkedList, LinkedNode, LinkedListLoop
+
+from classical import Dijkstra, ReversalLinkedList, LinkedNode, LinkedListLoop, Factorial
 
 
 class TestClassical(unittest.TestCase):
@@ -71,7 +72,7 @@ class TestClassical(unittest.TestCase):
         tail = reversed.reversal(head)
         list2 = TestClassical.get_linked_list_values(tail)
         list2.reverse()
-        self.assertListEqual(list1,list2)
+        self.assertListEqual(list1, list2)
 
     def test_loop(self):
         head = TestClassical.build_linked_list()
@@ -80,6 +81,12 @@ class TestClassical(unittest.TestCase):
         result2 = loop.hasLoop2(head)
         self.assertEqual(False, result1)
         self.assertEqual(False, result2)
+
+    def test_continuousZeroCount(self):
+        num = 20181124
+        f = Factorial.Factorial()
+        self.assertEqual(5045274, f.continuousZeroCount(num))
+        self.assertEqual(44924, f.continuousZeroCount(num) % 100007)
 
 
 if __name__ == '__main__':
